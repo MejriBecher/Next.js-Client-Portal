@@ -1,8 +1,14 @@
 import Link from "next/link";
 import Image from "next/image";
 import { SiteHeader } from "@/components/site-header";
+import { db } from "@/lib/db";
 
-export default function HomePage() {
+export const revalidate = 60;
+
+export default async function HomePage() {
+  const services = await db.service.findMany({
+    orderBy: { order: "asc" },
+  });
   return (
     <>
       <SiteHeader />
@@ -68,6 +74,35 @@ export default function HomePage() {
                   NexGen
                 </span>
               </div>
+            </div>
+          </div>
+        </section>
+
+        <section className="py-section-gap px-page-margin-mobile md:px-page-margin-desktop bg-surface-container-lowest">
+          <div className="max-w-[1120px] mx-auto">
+            <div className="text-center mb-16">
+              <span className="font-label text-[12px] leading-[1.2] font-semibold uppercase text-accent-sage mb-4 block">
+                What We Offer
+              </span>
+              <h2 className="font-display text-[32px] md:text-[40px] leading-[1.2] text-text-rich">
+                Services designed for growth
+              </h2>
+            </div>
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {services.map((service) => (
+                <div
+                  key={service.id}
+                  className="border border-border-light rounded-xl p-8 hover:border-accent-sage/30 hover:shadow-sm transition-all"
+                >
+                  <span className="text-[32px] block mb-6">{service.icon}</span>
+                  <h3 className="font-display text-[20px] leading-[1.3] text-text-rich mb-3">
+                    {service.name}
+                  </h3>
+                  <p className="font-body text-[16px] leading-relaxed text-on-surface-variant">
+                    {service.description}
+                  </p>
+                </div>
+              ))}
             </div>
           </div>
         </section>
