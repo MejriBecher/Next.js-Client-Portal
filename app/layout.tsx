@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
-import { Libre_Caslon_Text, Hanken_Grotesk } from "next/font/google";
+import { Libre_Caslon_Text, Hanken_Grotesk, Geist } from "next/font/google";
 import "./globals.css";
+import { cn } from "@/lib/utils";
+
+const geist = Geist({subsets:['latin'],variable:'--font-sans'});
 
 const libreCaslon = Libre_Caslon_Text({
   subsets: ["latin"],
@@ -31,7 +34,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${libreCaslon.variable} ${hankenGrotesk.variable}`}
+      className={cn(libreCaslon.variable, hankenGrotesk.variable, "font-sans", geist.variable)}
     >
       <body className="min-h-screen flex flex-col font-body antialiased">
         {children}

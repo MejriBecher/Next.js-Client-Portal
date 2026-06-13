@@ -1,8 +1,13 @@
 import Link from "next/link"
 import { Suspense } from "react"
+import { auth } from "@/lib/auth"
+import { redirect } from "next/navigation"
 import { SignupForm } from "@/components/signup-form"
 
-export default function SignupPage() {
+export default async function SignupPage() {
+  const session = await auth()
+  if (session?.user) redirect("/dashboard")
+  
   return (
     <div className="min-h-screen bg-surface-cream flex flex-col">
       <header className="px-page-margin-mobile md:px-page-margin-desktop pt-8">

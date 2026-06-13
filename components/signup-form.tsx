@@ -1,6 +1,5 @@
 "use client"
 
-import { signIn } from "next-auth/react"
 import { useRouter } from "next/navigation"
 import { FormEvent, useState, useCallback } from "react"
 
@@ -34,19 +33,7 @@ export function SignupForm() {
         return
       }
 
-      const result = await signIn("credentials", {
-        email,
-        password,
-        redirect: false,
-      })
-
-      if (result?.error) {
-        setError("Account created. Please sign in.")
-        setLoading(false)
-      } else {
-        router.push("/")
-        router.refresh()
-      }
+      router.push("/auth/login?registered=true")
     },
     [router]
   )

@@ -1,8 +1,18 @@
 import Link from "next/link"
 import { Suspense } from "react"
+import { auth } from "@/lib/auth"
+import { redirect } from "next/navigation"
 import { LoginForm } from "@/components/login-form"
 
-export default function LoginPage() {
+export default async function LoginPage(props: {
+  searchParams: Promise<{ registered?: string }>
+}) {
+  const session = await auth()
+  if (session?.user) redirect("/dashboard")
+
+  const searchParams = await props.searchParams
+  const registered = searchParams.registered === "true"
+
   return (
     <div className="min-h-screen bg-surface-cream flex flex-col">
       <header className="px-page-margin-mobile md:px-page-margin-desktop pt-8">
@@ -26,7 +36,19 @@ export default function LoginPage() {
               </p>
             </div>
 
-            <Suspense fallback={<div className="h-[200px] animate-pulse bg-surface-container-low rounded-lg" />}>
+            {registered && (
+              <div className="bg-state-success/10 border border-state-success/20 rounded-lg px-4 py-3 mb-6">
+                <p className="font-body text-[14px] leading-relaxed text-state-success text-center">
+                  Account created. Sign in to continue.
+                </p>
+              </div>
+            )}
+
+            <Suspense
+              fallback={
+                <div className="h-[200px] animate-pulse bg-surface-container-low rounded-lg" />
+              }
+            >
               <LoginForm />
             </Suspense>
 
