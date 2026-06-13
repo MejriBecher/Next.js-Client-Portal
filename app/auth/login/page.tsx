@@ -3,6 +3,7 @@ import { Suspense } from "react"
 import { auth } from "@/lib/auth"
 import { redirect } from "next/navigation"
 import { LoginForm } from "@/components/login-form"
+import { ThemeToggle } from "@/components/theme-toggle"
 
 export default async function LoginPage(props: {
   searchParams: Promise<{ registered?: string }>
@@ -15,18 +16,19 @@ export default async function LoginPage(props: {
 
   return (
     <div className="min-h-screen bg-surface-cream flex flex-col">
-      <header className="px-page-margin-mobile md:px-page-margin-desktop pt-8">
+      <header className="px-page-margin-mobile md:px-page-margin-desktop pt-8 flex items-center justify-between">
         <Link
           href="/"
           className="font-display text-[24px] leading-[1.3] text-text-rich tracking-tight hover:text-accent-sage transition-colors"
         >
           Hortensia
         </Link>
+        <ThemeToggle />
       </header>
 
       <main className="flex-1 flex items-center justify-center px-page-margin-mobile md:px-page-margin-desktop">
         <div className="w-full max-w-md">
-          <div className="bg-white rounded-xl border border-border/20 p-10">
+          <div className="bg-surface-container-lowest rounded-xl border border-border/20 p-10">
             <div className="text-center mb-10">
               <h1 className="font-display text-[32px] leading-[1.2] text-text-rich mb-3">
                 Welcome back

@@ -1,6 +1,7 @@
 "use client"
 
-import { useEffect, useState } from "react"
+import { useCallback, useEffect, useState } from "react"
+import { useTheme } from "@/components/theme-provider"
 import {
   BarChart,
   Bar,
@@ -22,6 +23,7 @@ type CssVars = {
 }
 
 function useCssVars(): CssVars {
+  const { theme } = useTheme()
   const [vars, setVars] = useState<CssVars>({
     text: "#1a1c1b",
     textMuted: "#444748",
@@ -30,7 +32,7 @@ function useCssVars(): CssVars {
     tooltipBorder: "#c4c7c7",
   })
 
-  useEffect(() => {
+  const read = useCallback(() => {
     const el = document.documentElement
     const get = (name: string, fallback: string) =>
       getComputedStyle(el).getPropertyValue(name).trim() || fallback
@@ -43,6 +45,8 @@ function useCssVars(): CssVars {
       tooltipBorder: get("--color-border", "#c4c7c7"),
     })
   }, [])
+
+  useEffect(() => { read() }, [read, theme])
 
   return vars
 }

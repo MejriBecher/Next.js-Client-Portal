@@ -6,9 +6,14 @@ import { db } from "@/lib/db";
 export const revalidate = 60;
 
 export default async function HomePage() {
-  const services = await db.service.findMany({
-    orderBy: { order: "asc" },
-  });
+  let services: { id: string; icon: string; name: string; description: string }[] = [];
+  try {
+    services = await db.service.findMany({
+      orderBy: { order: "asc" },
+    });
+  } catch {
+    // DB unavailable during build — ISR will populate at runtime
+  }
   return (
     <>
       <SiteHeader />

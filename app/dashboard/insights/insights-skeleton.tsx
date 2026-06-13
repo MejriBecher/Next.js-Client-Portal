@@ -7,7 +7,7 @@ export function InsightsSkeleton() {
         {Array.from({ length: 4 }).map((_, i) => (
           <div
             key={i}
-            className="bg-white rounded-xl border border-border/20 p-6 space-y-3"
+            className="bg-surface-container-lowest rounded-xl border border-border/20 p-6 space-y-3"
           >
             <Skeleton className="h-4 w-24" />
             <Skeleton className="h-8 w-20" />
@@ -17,11 +17,11 @@ export function InsightsSkeleton() {
       </div>
 
       <div className="grid md:grid-cols-2 gap-6">
-        <div className="bg-white rounded-xl border border-border/20 p-6 space-y-4">
+        <div className="bg-surface-container-lowest rounded-xl border border-border/20 p-6 space-y-4">
           <Skeleton className="h-5 w-48" />
           <Skeleton className="h-[300px] w-full" />
         </div>
-        <div className="bg-white rounded-xl border border-border/20 p-6 space-y-4">
+        <div className="bg-surface-container-lowest rounded-xl border border-border/20 p-6 space-y-4">
           <Skeleton className="h-5 w-48" />
           <Skeleton className="h-[300px] w-full" />
         </div>
