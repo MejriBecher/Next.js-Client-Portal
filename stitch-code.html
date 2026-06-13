@@ -1,0 +1,235 @@
+<!DOCTYPE html><html class="light" lang="en" style=""><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Hortensia | Premium Client Portal Platform</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Text:wght@400;700&amp;family=Hanken+Grotesk:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-cream": "#FAFAF8",
+                        "surface-container": "#eeeeec",
+                        "state-error": "#B04B4B",
+                        "inverse-on-surface": "#f1f1ef",
+                        "on-secondary": "#ffffff",
+                        "on-background": "#1a1c1b",
+                        "on-error-container": "#93000a",
+                        "on-secondary-fixed-variant": "#304c47",
+                        "tertiary-fixed-dim": "#adcae2",
+                        "error": "#ba1a1a",
+                        "secondary-fixed-dim": "#aecdc7",
+                        "inverse-surface": "#2f3130",
+                        "on-tertiary-container": "#6b879d",
+                        "tertiary-fixed": "#c9e6fe",
+                        "outline-variant": "#c4c7c7",
+                        "on-surface": "#1a1c1b",
+                        "on-primary-fixed-variant": "#474746",
+                        "surface-dim": "#dadad8",
+                        "text-rich": "#1a1a1a",
+                        "on-tertiary-fixed": "#001e2f",
+                        "primary": "#000000",
+                        "secondary": "#47645f",
+                        "on-secondary-fixed": "#02201c",
+                        "on-tertiary-fixed-variant": "#2e4a5d",
+                        "surface-container-highest": "#e2e3e1",
+                        "secondary-container": "#c9e9e3",
+                        "secondary-fixed": "#c9e9e3",
+                        "primary-fixed-dim": "#c8c6c5",
+                        "accent-mist": "#7692A8",
+                        "surface-bright": "#f9f9f7",
+                        "on-surface-variant": "#444748",
+                        "tertiary-container": "#001e2f",
+                        "surface-container-high": "#e8e8e6",
+                        "tertiary": "#000000",
+                        "on-tertiary": "#ffffff",
+                        "surface-container-lowest": "#ffffff",
+                        "outline": "#747878",
+                        "surface-variant": "#e2e3e1",
+                        "accent-sage": "#506D68",
+                        "on-primary": "#ffffff",
+                        "on-error": "#ffffff",
+                        "primary-container": "#1c1b1b",
+                        "surface": "#f9f9f7",
+                        "surface-container-low": "#f4f4f2",
+                        "on-primary-container": "#858383",
+                        "primary-fixed": "#e5e2e1",
+                        "inverse-primary": "#c8c6c5",
+                        "background": "#f9f9f7",
+                        "surface-tint": "#5f5e5e",
+                        "on-primary-fixed": "#1c1b1b",
+                        "on-secondary-container": "#4d6a65",
+                        "error-container": "#ffdad6",
+                        "state-success": "#4A7A6A"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "section-gap": "120px",
+                        "page-margin-desktop": "80px",
+                        "stack-unit": "8px",
+                        "gutter": "32px",
+                        "page-margin-mobile": "24px"
+                    },
+                    "fontFamily": {
+                        "headline-md": ["Libre Caslon Text"],
+                        "label-sm": ["Hanken Grotesk"],
+                        "label-md": ["Hanken Grotesk"],
+                        "headline-lg-mobile": ["Libre Caslon Text"],
+                        "headline-lg": ["Libre Caslon Text"],
+                        "body-md": ["Hanken Grotesk"],
+                        "display-lg": ["Libre Caslon Text"],
+                        "body-lg": ["Hanken Grotesk"]
+                    },
+                    "fontSize": {
+                        "headline-md": ["24px", {"lineHeight": "1.3", "fontWeight": "400"}],
+                        "label-sm": ["12px", {"lineHeight": "1.2", "fontWeight": "500"}],
+                        "label-md": ["14px", {"lineHeight": "1.2", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "headline-lg-mobile": ["24px", {"lineHeight": "1.2", "fontWeight": "400"}],
+                        "headline-lg": ["32px", {"lineHeight": "1.2", "fontWeight": "400"}],
+                        "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "display-lg": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "400"}],
+                        "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            background-color: #FAFAF8;
+            color: #1a1c1b;
+            -webkit-font-smoothing: antialiased;
+        }
+        .reveal {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .hero-mockup-shadow {
+            box-shadow: 0 20px 50px rgba(0,0,0,0.05);
+        }
+    </style>
+</head>
+<body class="font-body-md text-body-md overflow-x-hidden">
+<!-- Navbar -->
+<header class="bg-surface/80 backdrop-blur-md dark:bg-surface-container/80 docked full-width top-0 sticky z-50 transition-all duration-300">
+<nav class="max-w-[1120px] mx-auto px-page-margin-desktop flex justify-between items-center h-20">
+<div class="flex items-center gap-12">
+<a class="font-headline-md text-headline-md text-text-rich dark:text-inverse-on-surface tracking-tight" href="#">Hortensia</a>
+<div class="hidden md:flex items-center gap-gutter">
+<a class="text-on-surface-variant dark:text-outline-variant hover:text-accent-sage transition-colors duration-300 font-label-md text-label-md" href="#">Product</a>
+<a class="text-on-surface-variant dark:text-outline-variant hover:text-accent-sage transition-colors duration-300 font-label-md text-label-md" href="#">Solutions</a>
+<a class="text-on-surface-variant dark:text-outline-variant hover:text-accent-sage transition-colors duration-300 font-label-md text-label-md" href="#">Pricing</a>
+</div>
+</div>
+<div class="flex items-center gap-gutter">
+<a class="hidden sm:block text-on-surface hover:text-accent-sage transition-all font-label-md text-label-md hover:underline" href="#">Member Access</a>
+<button class="bg-accent-sage text-on-primary px-6 py-3 rounded hover:opacity-90 transition-all active:scale-95 font-label-md text-label-md">Get started</button>
+</div>
+</nav>
+</header>
+<main>
+<!-- Hero Section -->
+<section class="pt-24 pb-section-gap px-page-margin-mobile md:px-page-margin-desktop bg-surface-cream">
+<div class="max-w-[1120px] mx-auto text-center"><h1 class="font-display-lg text-display-lg md:text-[64px] text-text-rich max-w-2xl mb-10 tracking-tight leading-[1.05] mx-auto text-center">Your clients deserve a seamless experience.</h1><p class="font-body-lg text-body-lg text-on-surface-variant max-w-xl mb-12 mx-auto text-center">The editorial standard for client relationships. Hortensia provides a premium digital concierge that unifies communication, project management, and reporting into a single, sophisticated space your clients will love to use.</p><div class="flex flex-wrap gap-4 mb-20 justify-center"><button class="bg-accent-sage text-on-primary px-8 py-4 rounded font-label-md text-label-md hover:opacity-90 transition-all">Start free trial</button><button class="border border-outline text-on-surface px-8 py-4 rounded font-label-md text-label-md hover:bg-surface-container-low hover:border-accent-sage transition-all active:scale-95">Book a demo</button></div><div class="relative w-full max-w-5xl mx-auto overflow-hidden rounded-xl shadow-lg"><img src="https://lh3.googleusercontent.com/aida/AP1WRLs6hMT_OuXr4NIWBFZNtNx0SMeZhsAMpeiGZ-mFL1oCvUZ-RocN_sYOMpAnquuM9gFnnHxg6LmDcH6LLoKtRB8L_AJy51Ab5w0LzfkRizamNNuFiodMUFLDAtDwJxNNv6w3ZvK9rI7vN7Mm_UU2chgaCVr4EdSfKPv-pQPlRT7M84iFg4ziA41K4FpQqJT1VPJpEoc_1ClpHxe0mQ_r3jy4yMSvQ3BtcZUdNiMfiw_KnPGIFvcxIyHIgCAg" alt="Premium Client Portal Interface" class="w-full h-auto block"></div><div class="mt-24 pt-12 border-t border-outline-variant/30 flex flex-wrap justify-between items-center opacity-40 grayscale gap-8"><div class="font-headline-md text-on-surface-variant opacity-80">Anthropic</div><div class="font-headline-md text-on-surface-variant opacity-80">Linear</div><div class="font-headline-md text-on-surface-variant opacity-80">Stripe</div><div class="font-headline-md text-on-surface-variant opacity-80">Vercel</div><div class="font-headline-md text-on-surface-variant opacity-80">Mercury</div></div></div>
+</section>
+<!-- Two-column Features -->
+<section class="py-section-gap px-page-margin-mobile md:px-page-margin-desktop">
+<div class="max-w-[1120px] mx-auto space-y-section-gap">
+<!-- Feature 1 -->
+<div class="grid md:grid-cols-2 gap-20 items-center reveal active">
+<div class="space-y-6">
+<h2 class="font-headline-lg text-headline-lg text-text-rich">Communicate with clarity.</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant leading-relaxed">
+                            Replace messy email threads with organized project updates that keep everyone aligned. Our intelligent messaging system allows clients to see exactly where milestones stand in real-time. This eliminates friction and builds long-term trust through absolute transparency.
+                        </p>
+</div>
+<div class="rounded-xl overflow-hidden shadow-sm">
+<img alt="Organized project updates interface" class="w-full h-full object-cover" data-alt="A close-up shot of a minimalist project communication interface on a laptop screen. The design features soft blue and white chat bubbles with clean typography, highlighting a message from a client and a response about design assets. The background is a natural wood surface with soft morning sunlight casting gentle shadows, creating a calm and professional atmosphere focused on productive collaboration." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDhQBiN-tHCQzrBZvFSSJas6FhyR9mISoirsZcvrcA1hpISAvlZmerdf3MI6Rxvg38JordSNMLhXhtkepMzFnJwY3zBMRKpi9CJGPwl5IwL7qB3xhpmd484Z1KpPZid_proJGjpGMrrcBdTcX1owklE8gQbhx4jIRRVy8MpxFSu9VmGqUdP942d5Bzy9X0JqkkmfcXMn2uArXOQlwL2JLSyY-d71ViHrUUolTVQiFF8GiV8QrWH6WIXrt36USeFUBuTuZHHF8zl1Ox7">
+</div>
+</div>
+<!-- Feature 2 -->
+<div class="grid md:grid-cols-2 gap-20 items-center reveal active">
+<div class="order-2 md:order-1 rounded-xl overflow-hidden shadow-sm">
+<img alt="Project timeline overview" class="w-full h-full object-cover" data-alt="A sophisticated project timeline visualization on a digital tablet, showing different phases from discovery to launch. The interface uses a palette of soft sage greens and warm grays, with elegant progress bars and team member avatars. The overall aesthetic is highly editorial and airy, emphasizing a clear, high-level perspective of complex professional workflows within a modern workspace environment." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDfqDOmUehSfBW3NQT1gzF6tVOfNcJ5G9bs2VsibkznHqjG6PgfZwWqs2CgT2HI59Dwk6LLYOoWROd8Y6cUjvc4VRT-0QYvKKfX8wg08pMqOENbV-QCJCb4-fYNX9VefmL1ySnjchETb6l8p3mHizh3yDSur2uJjOKMnU3A0l9XQO-XwSewmUuHMtS99I57W2rgCZ3O2wkBxYgDsgSDAISthyIj5HCEZKx2QtjM5WVmhpO-POqI9BoKg6ng9P6wEViqgCOh13tQVLw7">
+</div>
+<div class="order-1 md:order-2 space-y-6">
+<h2 class="font-headline-lg text-headline-lg text-text-rich">Visualize every milestone.</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant leading-relaxed">
+                            Project management is transformed into a visual journey that celebrates progress. Showcase your work through stunning timelines that translate complex development into intuitive milestones. Your clients can witness the growth of their project with every interaction, fostering a sense of shared accomplishment.
+                        </p>
+</div>
+</div>
+</div>
+</section>
+<!-- Closing CTA -->
+<section class="py-24 px-page-margin-mobile md:px-page-margin-desktop bg-[#F0EFE8]">
+<div class="max-w-[1120px] mx-auto text-center py-20 reveal active">
+<h2 class="font-display-lg text-display-lg text-text-rich mb-8 max-w-2xl mx-auto leading-tight">
+                    Give your clients a space they'll actually use.
+                </h2>
+<button class="bg-accent-sage text-on-primary px-12 py-5 rounded-lg font-label-md text-label-md hover:opacity-90 transition-all shadow-lg shadow-accent-sage/10">
+                    Get started for free
+                </button>
+<p class="mt-6 text-on-surface-variant font-label-sm text-label-sm">No credit card required. Cancel anytime.</p>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-surface-container-low border-t border-outline-variant/30 mt-24">
+<div class="max-w-[1120px] mx-auto px-page-margin-desktop py-stack-unit flex flex-col gap-gutter py-16"><div class="flex flex-col md:flex-row justify-between gap-20 py-20"><div class="space-y-8 max-w-xs"><h3 class="font-headline-md text-headline-md text-text-rich tracking-tight">Hortensia</h3><p class="text-on-surface-variant font-body-md leading-relaxed">The editorial standard for client relationships. We provide a premium digital concierge that unifies communication and project management into a single, sophisticated space.</p></div><div class="grid grid-cols-2 sm:grid-cols-3 gap-16 md:gap-24"><div class="flex flex-col gap-6"><span class="font-label-md text-label-md text-text-rich uppercase tracking-widest">Product</span><div class="flex flex-col gap-4"><a class="text-on-surface-variant font-body-md hover:text-accent-sage transition-colors" href="#">Features</a><a class="text-on-surface-variant font-body-md hover:text-accent-sage transition-colors" href="#">Solutions</a><a class="text-on-surface-variant font-body-md hover:text-accent-sage transition-colors" href="#">Pricing</a><a class="text-on-surface-variant font-body-md hover:text-accent-sage transition-colors" href="#">Updates</a></div></div><div class="flex flex-col gap-6"><span class="font-label-md text-label-md text-text-rich uppercase tracking-widest">Company</span><div class="flex flex-col gap-4"><a class="text-on-surface-variant font-body-md hover:text-accent-sage transition-colors" href="#">About</a><a class="text-on-surface-variant font-body-md hover:text-accent-sage transition-colors" href="#">Careers</a><a class="text-on-surface-variant font-body-md hover:text-accent-sage transition-colors" href="#">Contact</a><a class="text-on-surface-variant font-body-md hover:text-accent-sage transition-colors" href="#">Press</a></div></div><div class="flex flex-col gap-6"><span class="font-label-md text-label-md text-text-rich uppercase tracking-widest">Resources</span><div class="flex flex-col gap-4"><a class="text-on-surface-variant font-body-md hover:text-accent-sage transition-colors" href="#">Documentation</a><a class="text-on-surface-variant font-body-md hover:text-accent-sage transition-colors" href="#">Help Center</a><a class="text-on-surface-variant font-body-md hover:text-accent-sage transition-colors" href="#">Community</a><a class="text-on-surface-variant font-body-md hover:text-accent-sage transition-colors" href="#">Security</a></div></div></div></div><div class="pt-12 border-t border-outline-variant/20 flex flex-col md:flex-row justify-between items-center gap-8 text-on-surface-variant font-label-sm text-label-sm pb-12"><div class="flex items-center gap-8"><span class="">© 2024 Hortensia. All rights reserved.</span><a href="#" class="hover:text-accent-sage transition-colors">Privacy Policy</a><a href="#" class="hover:text-accent-sage transition-colors">Terms of Service</a></div><div class="flex items-center gap-6"><div class="flex items-center gap-2"><span class="material-symbols-outlined text-[18px]">language</span><span class="">United States (English)</span></div><div class="flex items-center gap-4"><a href="#" class="hover:text-accent-sage transition-colors">Twitter</a><a href="#" class="hover:text-accent-sage transition-colors">LinkedIn</a></div></div></div></div>
+</footer>
+<script>
+        // Reveal animation on scroll
+        const observerOptions = {
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+        // Simple smooth scroll for links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+
+
+
+
+
+
+
+
+</body></html>

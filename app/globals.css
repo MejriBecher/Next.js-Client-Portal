@@ -1,0 +1,89 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-surface-cream: #FAFAF8;
+  --color-surface: #f9f9f7;
+  --color-surface-container: #eeeeec;
+  --color-surface-container-low: #f4f4f2;
+  --color-surface-container-high: #e8e8e6;
+  --color-surface-container-highest: #e2e3e1;
+  --color-surface-container-lowest: #ffffff;
+  --color-surface-dim: #dadad8;
+  --color-surface-bright: #f9f9f7;
+  --color-surface-variant: #e2e3e1;
+  --color-surface-cta: #F0EFE8;
+
+  --color-text-rich: #1a1a1a;
+  --color-on-surface: #1a1c1b;
+  --color-on-surface-variant: #444748;
+  --color-on-background: #1a1c1b;
+
+  --color-accent-sage: #506D68;
+  --color-accent-mist: #7692A8;
+  --color-accent-sage-hover: #45605b;
+
+  --color-border: #c4c7c7;
+  --color-border-light: #c4c7c766;
+  --color-outline: #747878;
+
+  --color-error: #ba1a1a;
+  --color-error-container: #ffdad6;
+  --color-state-success: #4A7A6A;
+  --color-state-error: #B04B4B;
+
+  --font-display: "Libre Caslon Text", ui-serif, Georgia, serif;
+  --font-headline: "Libre Caslon Text", ui-serif, Georgia, serif;
+  --font-body: "Hanken Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --font-label: "Hanken Grotesk", ui-sans-serif, system-ui, sans-serif;
+
+  --spacing-stack-unit: 8px;
+  --spacing-gutter: 32px;
+  --spacing-section-gap: 120px;
+  --spacing-page-margin-desktop: 80px;
+  --spacing-page-margin-mobile: 24px;
+
+  --radius-sm: 0.125rem;
+  --radius-md: 0.25rem;
+  --radius-lg: 0.5rem;
+  --radius-xl: 0.75rem;
+}
+
+body {
+  background-color: var(--color-surface-cream);
+  color: var(--color-on-surface);
+  -webkit-font-smoothing: antialiased;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-surface-cream: #1a1a18;
+    --color-surface: #1e1e1c;
+    --color-surface-container: #282826;
+    --color-surface-container-low: #232321;
+    --color-surface-container-high: #302f2d;
+    --color-surface-container-highest: #3b3a38;
+    --color-surface-container-lowest: #141413;
+    --color-surface-dim: #1a1a18;
+    --color-surface-bright: #3b3a38;
+    --color-surface-variant: #3b3a38;
+    --color-surface-cta: #232321;
+
+    --color-text-rich: #e8e6e2;
+    --color-on-surface: #e2e0dc;
+    --color-on-surface-variant: #b8b6b0;
+    --color-on-background: #e2e0dc;
+
+    --color-accent-sage: #7ab0a7;
+    --color-accent-mist: #a0c0d8;
+    --color-accent-sage-hover: #8cc0b7;
+
+    --color-border: #444440;
+    --color-border-light: #44444066;
+    --color-outline: #8a8a84;
+  }
+
+  body {
+    background-color: var(--color-surface-cream);
+    color: var(--color-on-surface);
+  }
+}

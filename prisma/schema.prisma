@@ -1,0 +1,43 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../lib/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum RequestStatus {
+  PENDING
+  IN_PROGRESS
+  DONE
+}
+
+model User {
+  id        String    @id @default(cuid())
+  email     String    @unique
+  password  String
+  name      String?
+  requests  Request[]
+  createdAt DateTime  @default(now())
+}
+
+model Request {
+  id          String        @id @default(cuid())
+  title       String
+  description String?
+  budget      Float?
+  status      RequestStatus @default(PENDING)
+  userId      String
+  user        User          @relation(fields: [userId], references: [id])
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+}
+
+model Service {
+  id          String  @id @default(cuid())
+  name        String
+  description String
+  icon        String  @default("✦")
+  order       Int     @default(0)
+}
