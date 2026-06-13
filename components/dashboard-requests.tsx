@@ -1,6 +1,9 @@
 "use client"
 
 import { useState, useCallback, useOptimistic, startTransition } from "react"
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
+import { Textarea } from "@/components/ui/textarea"
 
 type RequestStatus = "PENDING" | "IN_PROGRESS" | "DONE"
 
@@ -194,15 +197,14 @@ export function DashboardRequests({
   return (
     <div className="space-y-6">
       {!showForm && (
-        <button
+        <Button
           onClick={() => {
             resetForm()
             setShowForm(true)
           }}
-          className="bg-accent-sage text-white px-6 py-3 rounded-lg font-label text-[14px] leading-[1.2] tracking-[0.05em] font-semibold uppercase hover:opacity-90 transition-all"
         >
           New request
-        </button>
+        </Button>
       )}
 
       {showForm && (
@@ -229,12 +231,11 @@ export function DashboardRequests({
             >
               Title
             </label>
-            <input
+            <Input
               id="title"
               value={form.title}
               onChange={(e) => setForm((p) => ({ ...p, title: e.target.value }))}
               required
-              className="w-full px-4 py-3 rounded-lg border border-border bg-surface-cream font-body text-[16px] leading-relaxed text-on-surface placeholder:text-on-surface-variant/50 focus:outline-none focus:ring-2 focus:ring-accent-sage focus:border-accent-sage transition-all"
               placeholder="e.g. Website redesign"
             />
           </div>
@@ -246,14 +247,12 @@ export function DashboardRequests({
             >
               Description
             </label>
-            <textarea
+            <Textarea
               id="description"
               value={form.description}
               onChange={(e) =>
                 setForm((p) => ({ ...p, description: e.target.value }))
               }
-              rows={4}
-              className="w-full px-4 py-3 rounded-lg border border-border bg-surface-cream font-body text-[16px] leading-relaxed text-on-surface placeholder:text-on-surface-variant/50 focus:outline-none focus:ring-2 focus:ring-accent-sage focus:border-accent-sage transition-all resize-y"
               placeholder="Describe what you need..."
             />
           </div>
@@ -265,7 +264,7 @@ export function DashboardRequests({
             >
               Budget (optional)
             </label>
-            <input
+            <Input
               id="budget"
               type="number"
               step="0.01"
@@ -273,7 +272,6 @@ export function DashboardRequests({
               onChange={(e) =>
                 setForm((p) => ({ ...p, budget: e.target.value }))
               }
-              className="w-full px-4 py-3 rounded-lg border border-border bg-surface-cream font-body text-[16px] leading-relaxed text-on-surface placeholder:text-on-surface-variant/50 focus:outline-none focus:ring-2 focus:ring-accent-sage focus:border-accent-sage transition-all"
               placeholder="5000"
             />
           </div>
@@ -314,24 +312,23 @@ export function DashboardRequests({
           )}
 
           <div className="flex gap-3 pt-2">
-            <button
+            <Button
               type="submit"
               disabled={saving}
-              className="bg-accent-sage text-white px-6 py-3 rounded-lg font-label text-[14px] leading-[1.2] tracking-[0.05em] font-semibold uppercase hover:opacity-90 transition-all disabled:opacity-50"
             >
               {saving
                 ? "Saving..."
                 : editingId
                   ? "Save changes"
                   : "Create request"}
-            </button>
-            <button
+            </Button>
+            <Button
               type="button"
+              variant="outline"
               onClick={resetForm}
-              className="border border-border text-on-surface px-6 py-3 rounded-lg font-label text-[14px] leading-[1.2] tracking-[0.05em] font-semibold uppercase hover:bg-surface-container-low transition-all"
             >
               Cancel
-            </button>
+            </Button>
           </div>
         </form>
       )}

@@ -3,6 +3,8 @@
 import { signIn } from "next-auth/react"
 import { useRouter, useSearchParams } from "next/navigation"
 import { FormEvent, useState, useCallback } from "react"
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
 
 export function LoginForm() {
   const router = useRouter()
@@ -55,13 +57,12 @@ export function LoginForm() {
         >
           Email
         </label>
-        <input
+        <Input
           id="email"
           name="email"
           type="email"
           required
           autoComplete="email"
-          className="w-full px-4 py-3 rounded-lg border border-border bg-surface-cream font-body text-[16px] leading-relaxed text-on-surface placeholder:text-on-surface-variant/50 focus:outline-none focus:ring-2 focus:ring-accent-sage focus:border-accent-sage transition-all"
           placeholder="you@agency.com"
         />
       </div>
@@ -73,24 +74,24 @@ export function LoginForm() {
         >
           Password
         </label>
-        <input
+        <Input
           id="password"
           name="password"
           type="password"
           required
           autoComplete="current-password"
-          className="w-full px-4 py-3 rounded-lg border border-border bg-surface-cream font-body text-[16px] leading-relaxed text-on-surface placeholder:text-on-surface-variant/50 focus:outline-none focus:ring-2 focus:ring-accent-sage focus:border-accent-sage transition-all"
           placeholder="Enter your password"
         />
       </div>
 
-      <button
+      <Button
         type="submit"
         disabled={loading}
-        className="w-full bg-accent-sage text-white py-3.5 rounded-lg font-label text-[14px] leading-[1.2] tracking-[0.05em] font-semibold uppercase hover:opacity-90 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+        className="w-full"
+        size="lg"
       >
         {loading ? "Signing in..." : "Sign in"}
-      </button>
+      </Button>
     </form>
   )
 }

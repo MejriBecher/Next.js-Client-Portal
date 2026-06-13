@@ -2,6 +2,8 @@
 
 import { useRouter } from "next/navigation"
 import { FormEvent, useState, useCallback } from "react"
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
 
 export function SignupForm() {
   const router = useRouter()
@@ -55,12 +57,11 @@ export function SignupForm() {
         >
           Name
         </label>
-        <input
+        <Input
           id="name"
           name="name"
           type="text"
           autoComplete="name"
-          className="w-full px-4 py-3 rounded-lg border border-border bg-surface-cream font-body text-[16px] leading-relaxed text-on-surface placeholder:text-on-surface-variant/50 focus:outline-none focus:ring-2 focus:ring-accent-sage focus:border-accent-sage transition-all"
           placeholder="Your name"
         />
       </div>
@@ -72,13 +73,12 @@ export function SignupForm() {
         >
           Email
         </label>
-        <input
+        <Input
           id="email"
           name="email"
           type="email"
           required
           autoComplete="email"
-          className="w-full px-4 py-3 rounded-lg border border-border bg-surface-cream font-body text-[16px] leading-relaxed text-on-surface placeholder:text-on-surface-variant/50 focus:outline-none focus:ring-2 focus:ring-accent-sage focus:border-accent-sage transition-all"
           placeholder="you@agency.com"
         />
       </div>
@@ -90,25 +90,25 @@ export function SignupForm() {
         >
           Password
         </label>
-        <input
+        <Input
           id="password"
           name="password"
           type="password"
           required
           minLength={8}
           autoComplete="new-password"
-          className="w-full px-4 py-3 rounded-lg border border-border bg-surface-cream font-body text-[16px] leading-relaxed text-on-surface placeholder:text-on-surface-variant/50 focus:outline-none focus:ring-2 focus:ring-accent-sage focus:border-accent-sage transition-all"
           placeholder="At least 8 characters"
         />
       </div>
 
-      <button
+      <Button
         type="submit"
         disabled={loading}
-        className="w-full bg-accent-sage text-white py-3.5 rounded-lg font-label text-[14px] leading-[1.2] tracking-[0.05em] font-semibold uppercase hover:opacity-90 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+        className="w-full"
+        size="lg"
       >
         {loading ? "Creating account..." : "Create account"}
-      </button>
+      </Button>
     </form>
   )
 }
