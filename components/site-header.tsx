@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { ThemeToggle } from "@/components/theme-toggle";
 
 export function SiteHeader() {
   return (
@@ -33,6 +34,7 @@ export function SiteHeader() {
           </div>
         </div>
         <div className="flex items-center gap-gutter">
+          <ThemeToggle />
           <Link
             href="/auth/login"
             className="hidden sm:block text-on-surface hover:text-accent-sage transition-all font-label text-[14px] leading-[1.2] tracking-[0.05em] font-semibold hover:underline"
