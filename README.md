@@ -1,36 +1,126 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Hortensia — Premium Client Portal
 
-## Getting Started
+Modern client portal built with Next.js 16, featuring a dynamic request dashboard with real-time CRUD, actionable business insights with data visualisation, and a polished dark-mode-first UI.
 
-First, run the development server:
+## Tech Stack
+
+| Layer | Choice |
+|---|---|
+| Framework | Next.js 16 (App Router, Turbopack) |
+| Language | TypeScript (strict) |
+| Styling | Tailwind CSS v4 |
+| Database | PostgreSQL via Prisma ORM |
+| Auth | NextAuth v5 (Credentials provider, JWT) |
+| Validation | Zod v4 |
+| Charts | Recharts |
+| UI | Base UI, shadcn/ui, Lucide icons |
+
+## Prerequisites
+
+- **Node.js** 20+
+- **pnpm** 9+ — `npm i -g pnpm`
+- **Docker Desktop** (for local PostgreSQL) or a remote Postgres instance
+
+## Quick Start (under 5 minutes)
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
+# 1. Start PostgreSQL
+docker compose up -d
+
+# 2. Install dependencies
+pnpm install
+
+# 3. Copy environment variables
+cp .env.example .env
+
+# 4. Generate Prisma client + run migrations
+pnpm db:migrate
+
+# 5. Seed demo data
+pnpm db:seed
+
+# 6. Start dev server
 pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3001](http://localhost:3001).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Environment Variables
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| Variable | Required | Default |
+|---|---|---|
+| `DATABASE_URL` | Yes | `postgresql://postgres:postgres@localhost:5432/hortensia` |
+| `NEXTAUTH_SECRET` | Yes | `generate-a-random-secret-here` (change for production) |
+| `NEXTAUTH_URL` | Yes | `http://localhost:3001` |
 
-## Learn More
+## Available Scripts
 
-To learn more about Next.js, take a look at the following resources:
+| Command | Purpose |
+|---|---|
+| `pnpm dev` | Start dev server (port 3001) |
+| `pnpm build` | Production build |
+| `pnpm start` | Start production server |
+| `pnpm lint` | Run ESLint |
+| `pnpm db:migrate` | Run Prisma migrations |
+| `pnpm db:seed` | Seed demo user + sample data |
+| `pnpm db:studio` | Open Prisma Studio (GUI data browser) |
+| `pnpm db:reset` | Drop DB, re-run migrations, re-seed |
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Project Structure
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```
+src/
+├── app/
+│   ├── (public)/page.tsx      # Landing page (SSG)
+│   ├── api/
+│   │   ├── auth/signup        # User registration endpoint
+│   │   ├── insights           # Dashboard aggregation endpoint
+│   │   ├── requests           # Request CRUD endpoint
+│   │   └── requests/[id]      # Single-request endpoint
+│   ├── auth/login             # Sign-in page
+│   ├── auth/signup            # Registration page
+│   ├── dashboard              # Request list (authenticated)
+│   └── dashboard/insights     # Charts & stats (authenticated)
+├── components/                # Client and shared components
+├── lib/
+│   ├── auth.ts                # NextAuth configuration
+│   ├── db.ts                  # Prisma client singleton
+│   ├── schemas.ts             # Zod validation schemas
+│   └── generated/prisma/      # Generated Prisma client
+└── prisma/
+    ├── schema.prisma          # Database schema
+    └── seed.ts                # Database seed script
+```
 
-## Deploy on Vercel
+## Architecture
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Data fetching lives in **server components**. Client components only call API routes for mutations. See [`ARCHITECTURE.md`](./ARCHITECTURE.md) for:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- **A1** — Server vs client component breakdown
+- **A2** — Static generation on the landing page
+- **A3** — Data fetching strategy
+- **A4** — Scaling to 50,000 clients
+- **A5** — Security defenses (all server-side)
+- **A6** — Docker deployment & pre-flight checklist
+
+## Docker (Production Build)
+
+The project ships with a production `Dockerfile`:
+
+```bash
+docker build . -t hortensia-portal
+docker run -p 3000:3000 --env-file .env hortensia-portal
+```
+
+The image uses Next.js standalone output for minimal size.
+
+## Feature Roadmap
+
+- [x] Dark mode with no flash
+- [x] Request CRUD dashboard
+- [x] Insights with charts (Recharts)
+- [x] Zod validation on all API writes
+- [ ] Dynamic services from the database
+- [ ] shadcn/ui form components
+- [ ] Theme toggle on auth pages
+- [ ] E2E tests (Playwright)
