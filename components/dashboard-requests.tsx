@@ -42,7 +42,7 @@ const statusLabels: Record<RequestStatus, string> = {
 }
 
 const statusStyles: Record<RequestStatus, string> = {
-  PENDING: "bg-amber-100 text-amber-800 border-amber-200",
+  PENDING: "bg-amber-500/10 text-amber-700 dark:text-amber-300 border-amber-500/20",
   IN_PROGRESS: "bg-accent-sage/10 text-accent-sage border-accent-sage/20",
   DONE: "bg-surface-container-high text-on-surface-variant border-border",
 }
@@ -76,6 +76,13 @@ export function DashboardRequests({
     setSaving(false)
   }, [])
 
+  const serializeForm = useCallback((f: FormState) => ({
+    title: f.title,
+    description: f.description || undefined,
+    budget: f.budget ? Number(f.budget) : null,
+    status: f.status,
+  }), [])
+
   const handleCreate = useCallback(
     async (e: React.FormEvent) => {
       e.preventDefault()
@@ -85,7 +92,7 @@ export function DashboardRequests({
       const res = await fetch("/api/requests", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form),
+        body: JSON.stringify(serializeForm(form)),
       })
 
       const data = await res.json()
@@ -107,7 +114,7 @@ export function DashboardRequests({
       ])
       resetForm()
     },
-    [form, resetForm]
+    [form, resetForm, serializeForm]
   )
 
   const handleUpdate = useCallback(
@@ -120,7 +127,7 @@ export function DashboardRequests({
       const res = await fetch(`/api/requests/${editingId}`, {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form),
+        body: JSON.stringify(serializeForm(form)),
       })
 
       const data = await res.json()
@@ -145,7 +152,7 @@ export function DashboardRequests({
       )
       resetForm()
     },
-    [editingId, form, resetForm]
+    [editingId, form, resetForm, serializeForm]
   )
 
   const handleDelete = useCallback(
@@ -201,7 +208,7 @@ export function DashboardRequests({
       {showForm && (
         <form
           onSubmit={editingId ? handleUpdate : handleCreate}
-          className="bg-white rounded-xl border border-border/20 p-8 space-y-5"
+          className="bg-surface-container-lowest rounded-xl border border-border/20 p-8 space-y-5"
         >
           <h2 className="font-display text-[22px] leading-[1.2] text-text-rich">
             {editingId ? "Edit request" : "New request"}
@@ -295,7 +302,7 @@ export function DashboardRequests({
                       className={`flex-1 px-4 py-3 rounded-lg border font-label text-[13px] leading-[1.2] tracking-[0.02em] font-semibold transition-all ${
                         form.status === s
                           ? "bg-surface-container-high text-on-surface-variant border-border cursor-default"
-                          : "bg-white text-on-surface border-border hover:bg-surface-container-low"
+                          : "bg-surface-container-lowest text-on-surface border-border hover:bg-surface-container-low"
                       }`}
                     >
                       {statusLabels[s]}
@@ -344,7 +351,7 @@ export function DashboardRequests({
         {optimisticRequests.map((request) => (
           <div
             key={request.id}
-            className="bg-white rounded-xl border border-border/20 p-6"
+            className="bg-surface-container-lowest rounded-xl border border-border/20 p-6"
           >
             <div className="flex items-start justify-between gap-4">
               <div className="flex-1 min-w-0">
@@ -366,7 +373,7 @@ export function DashboardRequests({
                 <div className="flex items-center gap-4 mt-3">
                   {request.budget && (
                     <span className="font-body text-[14px] leading-relaxed text-on-surface-variant font-semibold">
-                      ${parseFloat(request.budget).toLocaleString()}
+                      ${parseFloat(request.budget).toLocaleString("en-US")}
                     </span>
                   )}
                   <span className="font-body text-[13px] leading-relaxed text-on-surface-variant/60">

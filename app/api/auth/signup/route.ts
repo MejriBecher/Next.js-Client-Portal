@@ -1,24 +1,21 @@
 import { hash } from "bcryptjs"
 import { db } from "@/lib/db"
 import { NextResponse } from "next/server"
+import { signupSchema } from "@/lib/validations"
 
 export async function POST(req: Request) {
   try {
-    const { email, password, name } = await req.json()
+    const body = await req.json()
 
-    if (!email || !password) {
+    const parsed = signupSchema.safeParse(body)
+    if (!parsed.success) {
       return NextResponse.json(
-        { error: "Email and password are required" },
+        { error: parsed.error.issues[0]?.message ?? "Invalid input" },
         { status: 400 }
       )
     }
 
-    if (password.length < 8) {
-      return NextResponse.json(
-        { error: "Password must be at least 8 characters" },
-        { status: 400 }
-      )
-    }
+    const { email, password, name } = parsed.data
 
     const existing = await db.user.findUnique({
       where: { email },

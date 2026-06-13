@@ -1,6 +1,7 @@
 import { auth } from "@/lib/auth"
 import { db } from "@/lib/db"
 import { NextResponse } from "next/server"
+import { updateRequestSchema } from "@/lib/validations"
 
 export async function GET(
   _req: Request,
@@ -47,7 +48,17 @@ export async function PATCH(
     return NextResponse.json({ error: "Forbidden" }, { status: 403 })
   }
 
-  const { title, description, budget, status } = await req.json()
+  const body = await req.json()
+
+  const parsed = updateRequestSchema.safeParse(body)
+  if (!parsed.success) {
+    return NextResponse.json(
+      { error: parsed.error.issues[0]?.message ?? "Invalid input" },
+      { status: 400 }
+    )
+  }
+
+  const { title, description, budget, status } = parsed.data
 
   if (status !== undefined && existing.status === "DONE" && status !== "DONE") {
     return NextResponse.json(
@@ -59,11 +70,9 @@ export async function PATCH(
   const request = await db.request.update({
     where: { id },
     data: {
-      ...(title !== undefined && { title: title.trim() }),
-      ...(description !== undefined && { description: description.trim() }),
-      ...(budget !== undefined && {
-        budget: budget !== null && budget !== "" ? parseFloat(budget) : null,
-      }),
+      ...(title !== undefined && { title }),
+      ...(description !== undefined && { description }),
+      ...(budget !== undefined && { budget }),
       ...(status !== undefined && { status }),
     },
   })
