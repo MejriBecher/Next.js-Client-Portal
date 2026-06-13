@@ -1,4 +1,5 @@
 import "dotenv/config"
+import { hash } from "bcryptjs"
 import { PrismaPg } from "@prisma/adapter-pg"
 import { PrismaClient } from "../lib/generated/prisma/client"
 
@@ -23,6 +24,65 @@ async function main() {
   }
 
   console.log("Seeded", services.length, "services")
+
+  const demoEmail = "demo@hortensia.test"
+  const existing = await db.user.findUnique({ where: { email: demoEmail } })
+  if (existing) {
+    console.log("Demo user already exists — skipping")
+    return
+  }
+
+  const password = await hash("password123", 12)
+
+  const user = await db.user.create({
+    data: {
+      email: demoEmail,
+      password,
+      name: "Demo Client",
+    },
+  })
+
+  const requests = await db.request.createMany({
+    data: [
+      {
+        title: "Homepage redesign",
+        description: "Update the hero section and add a new portfolio grid. We have wireframes ready.",
+        budget: 5000,
+        status: "IN_PROGRESS",
+        userId: user.id,
+      },
+      {
+        title: "SEO keyword research",
+        description: "Full keyword audit for our service pages — target 50 keywords across 5 categories.",
+        budget: 1200,
+        status: "PENDING",
+        userId: user.id,
+      },
+      {
+        title: "Brand guidelines PDF",
+        description: "Compile logo usage, color palette, typography, and tone of voice into a brand book.",
+        budget: 3000,
+        status: "DONE",
+        userId: user.id,
+      },
+      {
+        title: "Social media content pack",
+        description: "12 Instagram posts + 6 LinkedIn carousels for the Q3 campaign.",
+        status: "PENDING",
+        userId: user.id,
+      },
+      {
+        title: "Email newsletter template",
+        description: "Responsive HTML email template compatible with Mailchimp and HubSpot.",
+        budget: 800,
+        status: "PENDING",
+        userId: user.id,
+      },
+    ],
+  })
+
+  console.log("Created demo user:", demoEmail, "/ password123")
+  console.log("Created", requests.count, "sample requests")
 }
 
 main()
