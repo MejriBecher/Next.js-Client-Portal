@@ -25,12 +25,12 @@
 
 ## A2 — Rendering: Public Landing Page
 
-The landing page (`/`) uses **static generation (SSG)** — the default in Next.js App Router when no dynamic functions (`cookies()`, `headers()`, `searchParams`) or `revalidate`/`dynamic` exports are used.
+The landing page (`/`) uses **Incremental Static Regeneration (ISR)** with `revalidate = 60`.
 
-**Why SSG:**
-- Marketing pages don't need per-request freshness. Content changes are deploy-bound.
-- One build-time render serves all users — fastest TTFB, lowest server cost.
-- ISR could be added later with `revalidate` if content needs periodic updates without a full deploy.
+**Why ISR:**
+- Marketing pages don't need per-request freshness, but services data may change between deploys.
+- `revalidate = 60` means the page is statically served for most requests, and re-generated in the background at most once per minute after the first request following a content change.
+- Fallback: if the database is unavailable during the first build, the page renders gracefully without services (the catch block at `app/(public)/page.tsx:14`), and ISR populates them at runtime.
 
 ---
 
@@ -104,10 +104,10 @@ All defenses are server-side. Client-side checks alone do not count.
 | Variable | Local | Production |
 |---|---|---|
 | `DATABASE_URL` | `postgres://postgres:postgres@localhost:5432/hortensia` | Managed Postgres (Neon / Supabase / RDS) |
-| `AUTH_SECRET` | Random dev secret | Strong random secret via deployment secrets manager |
-| `AUTH_URL` | `http://localhost:3000` | Production URL |
+| `NEXTAUTH_SECRET` | Random dev secret | Strong random secret via deployment secrets manager |
+| `NEXTAUTH_URL` | `http://localhost:3001` | Production URL |
 
-`.env` is gitignored. `.env.example` documents all required vars.
+`.env` is gitignored. `.env.example` documents all required vars. Note: the dev server runs on port 3001 (`pnpm dev`), so `NEXTAUTH_URL` is set to `http://localhost:3001` to match.
 
 ### Local vs Production differences
 
