@@ -85,6 +85,51 @@ async function main() {
   console.log("Created", requests.count, "sample requests")
 }
 
+async function seedSecondUser() {
+  const email = "acme@hortensia.test"
+  const existing = await db.user.findUnique({ where: { email } })
+  if (existing) {
+    console.log("Second user already exists — skipping")
+    return
+  }
+
+  const password = await hash("acmecorp2024", 12)
+
+  const user = await db.user.create({
+    data: { email, password, name: "Acme Corp" },
+  })
+
+  const requests = await db.request.createMany({
+    data: [
+      {
+        title: "E-commerce platform rebuild",
+        description: "Full redesign and reimplementation of our WooCommerce store on Shopify. Migrate 500+ products.",
+        budget: 25000,
+        status: "PENDING",
+        userId: user.id,
+      },
+      {
+        title: "API integration for CRM",
+        description: "Connect our HubSpot CRM with the new Shopify store — sync orders, customers, and inventory.",
+        budget: 8000,
+        status: "PENDING",
+        userId: user.id,
+      },
+      {
+        title: "Product photography pack",
+        description: "Professional photos for 50 hero products — white background + lifestyle variants.",
+        budget: 4500,
+        status: "IN_PROGRESS",
+        userId: user.id,
+      },
+    ],
+  })
+
+  console.log("Created second user:", email, "/ acmecorp2024")
+  console.log("Created", requests.count, "additional requests")
+}
+
 main()
+  .then(seedSecondUser)
   .catch(console.error)
   .finally(() => db.$disconnect())
